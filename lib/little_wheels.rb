@@ -11,14 +11,14 @@ module LittleWheels
     end
 
     def to_s
-      t!("shared/#{name}", c: self)
+      t!("shared/#{default_template_name}", c: self)
     end
 
     def renderer
       ApplicationController
     end
 
-    def name
+    def default_template_name
       self.class.name.underscore
     end
   end
