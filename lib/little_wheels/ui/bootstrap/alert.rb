@@ -5,23 +5,17 @@ module LittleWheels
   module UI
     module Bootstrap
       class Alert < LittleWheels::Component
-        def initialize(message, variant: "primary", dismissable: false)
+        def initialize(message, variant: "primary")
           @message     = message
           @variant     = variant
-          @dismissable = dismissable
+
+          @class_list  = ["alert", "alert-#{@variant}"].join("  ")
         end
 
-        attr_reader :message, :variant, :dismissable
-
-        def alert_class_list
-          class_list = ["alert", "alert-#{@variant}"]
-          class_list << "alert-dismissable" if @dismissable
-
-          class_list.join(" ")
-        end
+        attr_reader :message, :variant
 
         TEMPLATE = <<-EOS
-          <div class="<%= c.alert_class_list %>" role="alert">
+          <div class="<%= c.class_list %>" role="alert">
             <%= c.message %>
           </div>
         EOS
