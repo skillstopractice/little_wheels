@@ -11,7 +11,11 @@ module LittleWheels
     end
 
     def to_s
-      self.class.const_defined?("TEMPLATE") ? t(self.class.const_get("TEMPLATE"), c: self) : t!("shared/#{default_template_name}", c: self)
+      if self.class.const_defined?("TEMPLATE") 
+        t(self.class.const_get("TEMPLATE"), c: self) 
+      else
+        t!("shared/#{default_template_name}", c: self)
+      end
     end
 
     def renderer
