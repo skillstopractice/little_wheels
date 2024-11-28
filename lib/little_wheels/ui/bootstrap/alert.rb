@@ -11,6 +11,8 @@ module LittleWheels
           @dismissable = dismissable
         end
 
+        attr_reader :message, :variant, :dismissable
+
         def alert_class_list
           class_list = ["alert", "alert-#{@variant}"]
           class_list << "alert-dismissable" if @dismissable
