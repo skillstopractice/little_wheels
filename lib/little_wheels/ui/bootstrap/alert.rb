@@ -12,7 +12,7 @@ module LittleWheels
           @class_list  = ["alert", "alert-#{@variant}"].join("  ")
         end
 
-        attr_reader :message, :variant
+        attr_reader :message, :variant, :class_list
 
         TEMPLATE = <<-EOS
           <div class="<%= c.class_list %>" role="alert">
