@@ -18,6 +18,14 @@ module LittleWheels
       end
     end
 
+    def accepts_slot(block)
+      @_slot = block
+    end
+
+    def slot
+      @_slot.call.to_s
+    end
+
     def renderer
       ApplicationController
     end
