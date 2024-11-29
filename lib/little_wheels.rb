@@ -12,9 +12,9 @@ module LittleWheels
 
     def to_s
       if self.class.const_defined?("TEMPLATE") 
-        t(self.class.const_get("TEMPLATE"), c: self) 
+        t(self.class.const_get("TEMPLATE"), c: self, x: renderer.helpers.tag) 
       else
-        t!("shared/#{default_template_name}", c: self)
+        t!("shared/#{default_template_name}", c: self, x: renderer.helpers.tag)
       end
     end
 
