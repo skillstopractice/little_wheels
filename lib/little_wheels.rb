@@ -19,7 +19,7 @@ module LittleWheels
         if self.class.const_defined?(:TEMPLATE) 
           t(self.class.const_get(:TEMPLATE), c: self, x: self.x ) 
         else
-          t!("shared/#{default_template_name}", c: self, x: self.x )
+          t!(default_template_name, c: self, x: self.x )
         end
       end
     end
@@ -39,7 +39,7 @@ module LittleWheels
     end
 
     def default_template_name
-      self.class.name.underscore
+      "shared/#{self.class.name.underscore}"
     end
 
     def capture(&block)
