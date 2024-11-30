@@ -1,6 +1,20 @@
 module LittleWheels
   VERSION = "0.0.7"
 
+  class Buffer
+    def initialize(string)
+      @string = string.html_safe
+    end
+
+    def +(other)
+      self.class.new(@string + other)
+    end
+
+    def to_s
+      @string
+    end
+  end
+
   module Component
     def t(template, **locals)
       renderer.render(inline: template, locals:)
@@ -15,7 +29,7 @@ module LittleWheels
     end
 
     def +(other)
-      [self, other].join
+      Buffer.new(to_s, other.to_s)
     end
 
     def to_s
