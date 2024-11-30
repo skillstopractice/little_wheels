@@ -14,6 +14,10 @@ module LittleWheels
       renderer.helpers.tag
     end
 
+    def +(other)
+      to_s + other.to_s
+    end
+
     def to_s
       renderer.helpers.capture do
         if self.class.const_defined?(:TEMPLATE) 
