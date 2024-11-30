@@ -15,7 +15,7 @@ module LittleWheels
     end
 
     def +(other)
-      [self, other].join.html_safe
+      [self, other].join
     end
 
     def to_s
