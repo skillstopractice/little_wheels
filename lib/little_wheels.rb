@@ -29,7 +29,7 @@ module LittleWheels
     end
 
     def +(other)
-      Buffer.new(to_s, other.to_s)
+      Buffer.new(to_s + other.to_s)
     end
 
     def to_s
