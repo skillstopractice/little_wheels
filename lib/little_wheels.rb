@@ -1,16 +1,6 @@
 module LittleWheels
   VERSION = "0.0.7"
 
-  class TagProxy
-    def initialize(component)
-      @component = component
-    end
-
-    def method_missing(*)
-      @component.o { renderer.helpers.tag.send(*) }
-    end
-  end
-
   class Buffer
     def initialize(string)
       @string = string.html_safe
@@ -35,7 +25,7 @@ module LittleWheels
     end
     
     def x
-      TagProxy.new(self)
+      renderer.helpers.tag
     end
 
     def +(other)
