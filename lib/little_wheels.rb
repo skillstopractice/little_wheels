@@ -7,7 +7,7 @@ module LittleWheels
     end
 
     def +(other)
-      self.class.new(@string + other)
+      self.class.new(@string + other.to_s)
     end
 
     def to_s
