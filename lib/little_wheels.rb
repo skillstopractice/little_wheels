@@ -15,9 +15,8 @@ module LittleWheels
     end
 
     def +(other)
-      [to_s, other.to_s].join.html_safe
+      [self, other].join
     end
-
 
     def to_s
       renderer.helpers.capture do
