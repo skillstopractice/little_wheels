@@ -41,11 +41,6 @@ module LittleWheels
         end
       end
     end
-
-    def to_str
-      to_s.html_safe
-    end
-
     def accepts_slot(block)
       @_slot = block
     end
