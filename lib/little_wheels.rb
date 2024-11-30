@@ -19,7 +19,7 @@ module LittleWheels
     end
 
     def +(other)
-      o { [to_s, other].join }
+      o { to_s } + o { other.to_s }
     end
 
     def to_s
