@@ -28,6 +28,10 @@ module LittleWheels
       renderer.helpers.tag
     end
 
+    def helpers
+      renderer.helpers
+    end
+
     def +(other)
       Buffer.new(to_s + other.to_s)
     end
@@ -41,6 +45,7 @@ module LittleWheels
         end
       end
     end
+
     def accepts_slot(block)
       @_slot = block
     end
