@@ -16,9 +16,9 @@ module LittleWheels
 
     def to_s
       if self.class.const_defined?("TEMPLATE") 
-        t(self.class.const_get("TEMPLATE"), c: self, x: self.x, slot: slot ) 
+        t(self.class.const_get("TEMPLATE"), c: self, x: self.x, slot: self.slot ) 
       else
-        t!("shared/#{default_template_name}", c: self, x: self.x, slot: slot )
+        t!("shared/#{default_template_name}", c: self, x: self.x, slot: self.slot )
       end
     end
 
@@ -27,7 +27,7 @@ module LittleWheels
     end
 
     def slot
-      @_slot.call.to_s
+      @_slot.call.to_s.html_safe
     end
 
     def renderer
