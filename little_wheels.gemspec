@@ -8,7 +8,7 @@ PKG_FILES = Dir.glob([
 
 Gem::Specification.new do |s|
   s.name        = "little_wheels"
-  s.version     = "0.0.6"
+  s.version     = "0.0.7"
   s.summary     = "Little Wheels!"
   s.description = "Potential future implementation of the smallest Rails component library that can possibly work."
   s.authors     = ["Gregory Brown"]

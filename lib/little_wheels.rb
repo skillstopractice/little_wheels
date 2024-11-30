@@ -1,5 +1,5 @@
 module LittleWheels
-  VERSION = "0.0.6"
+  VERSION = "0.0.7"
 
   class Component
     def t(template, **locals)
@@ -40,6 +40,10 @@ module LittleWheels
 
     def default_template_name
       self.class.name.underscore
+    end
+
+    def capture(&block)
+      block.call.to_s.html_safe
     end
   end
 end
