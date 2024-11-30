@@ -28,7 +28,7 @@ module LittleWheels
       end
     end
 
-    alias_method :to_s, :to_str
+    alias_method :to_str, :to_s
 
     def accepts_slot(block)
       @_slot = block
