@@ -1,7 +1,7 @@
 module LittleWheels
   VERSION = "0.0.7"
 
-  class Component
+  module Component
     def t(template, **locals)
       renderer.render(inline: template, locals:)
     end
