@@ -43,7 +43,7 @@ module LittleWheels
     end
 
     def to_str
-      Buffer.new(to_s)
+      to_s.html_safe
     end
 
     def accepts_slot(block)
