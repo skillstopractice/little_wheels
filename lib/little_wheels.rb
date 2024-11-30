@@ -28,10 +28,6 @@ module LittleWheels
       end
     end
 
-    def to_str
-      to_s
-    end
-
     def accepts_slot(block)
       @_slot = block
     end
