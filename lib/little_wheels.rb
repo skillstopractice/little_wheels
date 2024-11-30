@@ -1,5 +1,5 @@
 module LittleWheels
-  VERSION = "0.0.7"
+  VERSION = "0.0.8"
 
   class Buffer
     def initialize(string)
@@ -23,27 +23,31 @@ module LittleWheels
     def t!(template, **locals)
       renderer.render(template, locals:, layout: nil)
     end
-    
+
     def x
-      renderer.helpers.tag
+      helpers.tag
     end
 
-    def helpers
-      renderer.helpers
+    def o(&block)
+      block.binding.receiver.capture(&block)
     end
 
     def +(other)
       Buffer.new(to_s + other.to_s)
     end
-
+    
     def to_s
-      renderer.helpers.capture do
+      helpers.capture do
         if self.class.const_defined?(:TEMPLATE) 
           t(self.class.const_get(:TEMPLATE), c: self, x: self.x ) 
         else
           t!(default_template_name, c: self, x: self.x )
         end
       end
+    end
+
+    def helpers
+      renderer.helpers
     end
 
     def accepts_slot(block)
@@ -66,10 +70,6 @@ module LittleWheels
 
     def capture(&block)
       block.call.to_s.html_safe
-    end
-
-    def o(&block)
-      block.binding.receiver.capture(&block)
     end
   end
 end
