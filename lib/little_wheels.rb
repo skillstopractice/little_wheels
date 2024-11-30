@@ -14,12 +14,8 @@ module LittleWheels
       renderer.helpers.tag
     end
 
-    def o(&block)
-      block.binding.receiver.capture(&block)
-    end
-
     def +(other)
-      o { to_s } + o { other.to_s }
+      [to_s, other].join
     end
 
     def to_s
@@ -56,6 +52,10 @@ module LittleWheels
 
     def capture(&block)
       block.call.to_s.html_safe
+    end
+
+    def o(&block)
+      block.binding.receiver.capture(&block)
     end
   end
 end
