@@ -9,12 +9,16 @@ module LittleWheels
     def t!(template, **locals)
       renderer.render(template, locals:, layout: nil)
     end
+    
+    def x
+      renderer.helpers.tag
+    end
 
     def to_s
       if self.class.const_defined?("TEMPLATE") 
-        t(self.class.const_get("TEMPLATE"), c: self, x: renderer.helpers.tag) 
+        t(self.class.const_get("TEMPLATE"), c: self, x: self.x) 
       else
-        t!("shared/#{default_template_name}", c: self, x: renderer.helpers.tag)
+        t!("shared/#{default_template_name}", c: self, x: self.x)
       end
     end
 
