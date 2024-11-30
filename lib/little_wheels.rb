@@ -1,5 +1,5 @@
 module LittleWheels
-  VERSION = "0.0.5"
+  VERSION = "0.0.6"
 
   class Component
     def t(template, **locals)
@@ -15,10 +15,12 @@ module LittleWheels
     end
 
     def to_s
-      if self.class.const_defined?("TEMPLATE") 
-        t(self.class.const_get("TEMPLATE"), c: self, x: self.x, slot: self.slot ) 
-      else
-        t!("shared/#{default_template_name}", c: self, x: self.x, slot: self.slot )
+      renderer.helpers.capture do
+        if self.class.const_defined?(:TEMPLATE) 
+          t(self.class.const_get(:TEMPLATE), c: self, x: self.x ) 
+        else
+          t!("shared/#{default_template_name}", c: self, x: self.x )
+        end
       end
     end
 
@@ -27,7 +29,9 @@ module LittleWheels
     end
 
     def slot
-      @_slot.call.to_s.html_safe
+      context = @_slot.binding.receiver
+
+      context.capture(&@_slot)
     end
 
     def renderer
