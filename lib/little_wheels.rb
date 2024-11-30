@@ -19,7 +19,7 @@ module LittleWheels
     end
 
     def +(other)
-      [to_s, other].join.html_safe
+      o { [to_s, other].join }
     end
 
     def to_s
