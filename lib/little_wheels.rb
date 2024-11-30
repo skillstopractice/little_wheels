@@ -42,6 +42,10 @@ module LittleWheels
       end
     end
 
+    def to_str
+      Buffer.new(to_s)
+    end
+
     def accepts_slot(block)
       @_slot = block
     end
