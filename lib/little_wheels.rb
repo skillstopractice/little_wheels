@@ -69,7 +69,7 @@ module LittleWheels
     end
 
     def helpers
-      LittleWheels.renderer
+      LittleWheels.helpers
     end
 
     def default_template_name
