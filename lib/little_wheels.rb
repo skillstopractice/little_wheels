@@ -1,5 +1,5 @@
 module LittleWheels
-  VERSION = "0.0.10"
+  VERSION = "0.0.11"
 
   def self.renderer
     ApplicationController
@@ -78,6 +78,10 @@ module LittleWheels
 
     def capture(&block)
       block.call.to_s.html_safe
+    end
+
+    def render_in(context)
+      context.render(:inline => to_s)
     end
   end
 end
