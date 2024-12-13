@@ -1,5 +1,5 @@
 module LittleWheels
-  VERSION = "0.0.12"
+  VERSION = "0.0.13"
 
   def self.renderer
     ApplicationController
@@ -65,7 +65,7 @@ module LittleWheels
     def slot
       context = @_slot.binding.receiver
 
-      context.capture(&@_slot)
+      context.capture { @_slot.call.to_s }
     end
 
     def renderer
