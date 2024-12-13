@@ -1,5 +1,5 @@
 module LittleWheels
-  VERSION = "0.0.11"
+  VERSION = "0.0.12"
 
   def self.renderer
     ApplicationController
@@ -45,6 +45,10 @@ module LittleWheels
     end
 
     def to_s
+      to_html
+    end
+
+    def to_html
       helpers.capture do
         if self.class.const_defined?(:TEMPLATE)
           t(self.class.const_get(:TEMPLATE), c: self, x: self.x )
@@ -81,7 +85,7 @@ module LittleWheels
     end
 
     def render_in(context)
-      context.render(:inline => to_s)
+      context.render(:inline => to_html)
     end
   end
 end
