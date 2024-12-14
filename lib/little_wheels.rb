@@ -1,5 +1,5 @@
 module LittleWheels
-  VERSION = "0.0.13"
+  VERSION = "0.0.14"
 
   def self.renderer
     ApplicationController
@@ -24,6 +24,14 @@ module LittleWheels
   end
 
   module Component
+    module ClassMethods
+      def [](*a, **o, &b) = new(*a, **o, &b)
+    end
+
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def t(template, **locals)
       renderer.render(inline: template, locals:)
     end
