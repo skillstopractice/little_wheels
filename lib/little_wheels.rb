@@ -1,26 +1,16 @@
 module LittleWheels
-  VERSION = "0.0.14"
+  VERSION = "0.0.15"
 
-  def self.renderer
-    ApplicationController
-  end
-
-  def self.helpers
-    renderer.helpers
-  end
+  def self.renderer = ApplicationController
+  def self.helpers  = self.renderer.helpers
 
   class Buffer
     def initialize(string)
       @string = string.html_safe
     end
 
-    def +(other)
-      self.class.new(@string + other.to_s)
-    end
-
-    def to_s
-      @string
-    end
+    def +(other) = self.class.new(@string + other.to_s)
+    def to_s     = @string
   end
 
   module Component
@@ -28,32 +18,36 @@ module LittleWheels
       def [](*a, **o, &b) = new(*a, **o, &b)
     end
 
-    def self.included(base)
-      base.extend(ClassMethods)
-    end
+    def self.included(base)    = base.extend(ClassMethods)
 
-    def t(template, **locals)
-      renderer.render(inline: template, locals:)
-    end
+    def t(template, **locals)  = renderer.render(inline: template, locals:)
 
-    def t!(template, **locals)
-      renderer.render(template, locals:, layout: nil)
-    end
+    def t!(template, **locals) = renderer.render(template, locals:, layout: nil)
 
-    def x
-      helpers.tag
-    end
+    def x = helpers.tag
 
-    def o(&block)
-      block.binding.receiver.capture(&block)
-    end
+    def o(&block) = block.binding.receiver.capture(&block)
 
-    def +(other)
-      Buffer.new(to_s + other.to_s)
-    end
+    def +(other) = Buffer.new(to_s + other.to_s)
 
-    def to_s
-      to_html
+    def accepts_slot(block) = @_slot = block
+
+    def capture(&block) = block.call.to_s.html_safe
+
+    def default_template_name = "shared/#{self.class.name.underscore}"
+
+    def helpers  = LittleWheels.helpers
+
+    def renderer = LittleWheels.renderer
+
+    def render_in(context) = context.render(:inline => to_html)
+
+    def to_s = to_html
+
+    def slot
+      context = @_slot.binding.receiver
+
+      context.capture { @_slot.call.to_s }
     end
 
     def to_html
@@ -64,36 +58,6 @@ module LittleWheels
           t!(default_template_name, c: self, x: self.x )
         end
       end
-    end
-
-    def accepts_slot(block)
-      @_slot = block
-    end
-
-    def slot
-      context = @_slot.binding.receiver
-
-      context.capture { @_slot.call.to_s }
-    end
-
-    def renderer
-      LittleWheels.renderer
-    end
-
-    def helpers
-      LittleWheels.helpers
-    end
-
-    def default_template_name
-      "shared/#{self.class.name.underscore}"
-    end
-
-    def capture(&block)
-      block.call.to_s.html_safe
-    end
-
-    def render_in(context)
-      context.render(:inline => to_html)
     end
   end
 end
